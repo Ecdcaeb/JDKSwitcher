@@ -31,17 +31,6 @@ void setJava(char* var){
 	delete cmd;
 	delete junk1; 
 }
-void readFromConfig(std::vector<std::string>& jdks){
-	std::fstream config("jdk.cfg");
-	if(config.good()){
-		std::string line; 
-		while(std::getline(config,line)){
-			jdks.push_back(line);
-		}
-	}else{
-		config<<"";//create;
-	}
-}
 void getAllFiles(std::string path, std::vector<std::string>& files) 
 {
 	// нд╪Ч╬Д╠З
@@ -338,7 +327,9 @@ std::string getJavaChosen(std::vector<std::string>& jdks){
 	cho=cho+"#"; 
 	
 	
+	
 	int index=chosenbox(cho);
+
 
 	std::cout<<std::endl;
 	std::cout<<std::endl;
@@ -346,7 +337,59 @@ std::string getJavaChosen(std::vector<std::string>& jdks){
 	
 	return Java8ListPath[index];
 }
+void readFromConfig(std::vector<std::string>& jdks){
+	DWORD attribs=GetFileAttributes("jdks.cfg");
+	if(attribs == INVALID_FILE_ATTRIBUTES){
+		//create file
+		std::ofstream oc;
+		oc.open("jdks.cfg",std::ios::app);
+		if(!oc){
+			tellraw("&rcreate config fail");
+		}
+		oc.close();
+		return;
+	}
+	
+	if(!(attribs&FILE_ATTRIBUTE_DIRECTORY)){
+		std::ifstream ic;
+		ic.open("jdks.cfg",std::ios::in);
+		if(ic.bad() || !ic.is_open()){
+			tellraw("&rread config fail");
+		}else{
+			std::string line; 
+			while(std::getline(ic,line)){
+				if(line.empty())continue;
+				jdks.push_back(line);
+			}
+		}
+		ic.close();
+		return;
+	}
+}
+void printLICENSE(){
+	std::ifstream lic("LICENSE");
+	if(lic.bad()){
+		tellraw("&r Error:LICENSE not found!");
+	}else{
+		std::string buf;
+		std::string line; 
+		while(std::getline(lic,line)){
+			if(!line.empty()){
+				buf+=line+"\n";
+			}
+		}
+		buf=buf.substr(0,buf.length()-1);
+		printf("%s",buf.c_str());
+	}
+	lic.close();
+}
 int main(){
+	//pre Launching
+	SetConsoleTitle("JDKSwitcher");
+	printLICENSE();
+	tellraw("\n\n&yChoose your jdk(in  C:\\Program Files\\Java\\    or  jdks.cfg each line) \n");
+	printf("Current JAVA_HOME : %s \n",quoteString(getJava())->c_str());
+	//launch
 	std::vector<std::string> jdks;
 	readFromConfig(jdks);
 	readFromProgram(jdks);
