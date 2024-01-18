@@ -366,29 +366,18 @@ void readFromConfig(std::vector<std::string>& jdks){
 		return;
 	}
 }
-void printLICENSE(){
-	std::ifstream lic("LICENSE");
-	if(lic.bad()){
-		tellraw("&r Error:LICENSE not found!");
-	}else{
-		std::string buf;
-		std::string line; 
-		while(std::getline(lic,line)){
-			if(!line.empty()){
-				buf+=line+"\n";
-			}
-		}
-		buf=buf.substr(0,buf.length()-1);
-		printf("%s",buf.c_str());
-	}
-	lic.close();
+void printMainScreen(){
+	tellraw("&aJDK Sitcher\n");
+	tellraw("&a    Copyright (c) 2024 Hileb\n");
+	tellraw("&a  this is a Software enable you change the \"JAVA_HOME\" fastly.\n");
+	printf("Current JAVA_HOME : %s \n",quoteString(getJava())->c_str());
+	tellraw("\n\n&yChoose your jdk(in  C:\\Program Files\\Java\\    or  jdks.cfg each line) \n");
 }
+
 int main(){
 	//pre Launching
 	SetConsoleTitle("JDKSwitcher");
-	printLICENSE();
-	tellraw("\n\n&yChoose your jdk(in  C:\\Program Files\\Java\\    or  jdks.cfg each line) \n");
-	printf("Current JAVA_HOME : %s \n",quoteString(getJava())->c_str());
+	printMainScreen();
 	//launch
 	std::vector<std::string> jdks;
 	readFromConfig(jdks);
