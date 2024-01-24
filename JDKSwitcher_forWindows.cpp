@@ -1,3 +1,7 @@
+#define VERSION "4.0"
+
+
+
 #include <io.h>
 #include <string>
 #include <vector>
@@ -367,7 +371,10 @@ void readFromConfig(std::vector<std::string>& jdks){
 	}
 }
 void printMainScreen(){
-	tellraw("&aJDK Sitcher\n");
+	tellraw("&aJDK Sitcher - version ");
+	color(gray);
+	printf(VERSION);
+	printf("\n");
 	tellraw("&a    Copyright (c) 2024 Hileb\n");
 	tellraw("&a  this is a Software enable you change the \"JAVA_HOME\" fastly.\n");
 	printf("Current JAVA_HOME : %s \n",quoteString(getJava())->c_str());
