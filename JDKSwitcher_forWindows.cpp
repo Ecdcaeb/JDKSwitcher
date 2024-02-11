@@ -1,4 +1,4 @@
-#define VERSION "4.0"
+#define VERSION "5.0"
 
 
 
@@ -14,7 +14,12 @@
 #include <fstream>
 
 std::string* getJava(){
-	return new std::string(getenv("JAVA_HOME"));
+	try{
+		return new std::string(getenv("JAVA_HOME"));
+	}catch(std::exception e){
+		return new std::string("<none>");
+	}
+
 }
 std::string* quoteString(std::string* str){
 	str->insert(0,1,'\"');

@@ -8,8 +8,8 @@
 // TO CHANGE VERSION INFORMATION, EDIT PROJECT OPTIONS...
 //
 1 VERSIONINFO
-FILEVERSION 4,0,0,0
-PRODUCTVERSION 4,0,0,0
+FILEVERSION 5,0,0,1
+PRODUCTVERSION 5,0,0,1
 FILETYPE VFT_APP
 {
   BLOCK "StringFileInfo"
@@ -17,14 +17,14 @@ FILETYPE VFT_APP
     BLOCK "040904E4"
     {
       VALUE "CompanyName", "Hileb"
-      VALUE "FileVersion", "4.0.0.0"
+      VALUE "FileVersion", "5.0.0.1"
       VALUE "FileDescription", ""
       VALUE "InternalName", "JDKSwitcher"
       VALUE "LegalCopyright", "Hileb"
       VALUE "LegalTrademarks", "Hileb"
       VALUE "OriginalFilename", "JDKSwitcher"
       VALUE "ProductName", "JDKSwitcher"
-      VALUE "ProductVersion", "4.0.0.0"
+      VALUE "ProductVersion", "5.0.0.1"
     }
   }
   BLOCK "VarFileInfo"
